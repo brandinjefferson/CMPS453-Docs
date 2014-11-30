@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'home_controller/home'
+
+  get 'home_controller/help'
+
   resources :administrators
 
   resources :requests
