@@ -1,16 +1,15 @@
 class UserNotifier < ActionMailer::Base
-  default from: "bej0843@louisiana.edu" #Administrator's email
+  default from: "brandinui@gmail.com" #Administrator's email
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #
   #   en.user_notifier.notification_email.subject
   #
-  def notification_email(request,createlink)
+  def response_email(request)
     @clid = request.clid + "@louisiana.edu"
-    @origclid = request.clid
-    @link = createlink
-    mail  to: clid, subject: 'Room Change Request Notice'
+    @request = request
+    mail  to: @clid, subject: 'Room Change Request Notice'
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml

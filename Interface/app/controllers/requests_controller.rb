@@ -25,16 +25,21 @@ class RequestsController < ApplicationController
   # POST /requests.json
   def create
     @request = Request.new(request_params)
-
-    respond_to do |format|
-      if @request.save
-        format.html { redirect_to @request, notice: 'Request was successfully created.' }
-        format.json { render :show, status: :created, location: @request }
-      else
-        format.html { render :new }
-        format.json { render json: @request.errors, status: :unprocessable_entity }
-      end
-    end
+    #UserNotifier.response_email(@request).deliver_now
+    flash[:success] = 'Confirmation email sent to ' + @request.clid + '@louisiana.edu'
+    #respond_to do |format|
+    #  if @request.save
+        
+    #    format.html { redirect_to @request, notice: 'Request was successfully created.' }
+    #    format.json { render :show, status: :created, location: @request }
+    #  else
+    #    format.html { render :new }
+    #    format.json { render json: @request.errors, status: :unprocessable_entity }
+       
+    #  end
+    #end
+    @request.save
+    redirect_to submitapp_path
   end
 
   # PATCH/PUT /requests/1
@@ -59,6 +64,13 @@ class RequestsController < ApplicationController
       format.html { redirect_to requests_url, notice: 'Request was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def sign_up(request)
+    @request = request
+    @request.save
+    format.html { redirect_to 'http://housing.louisiana.edu/', notice: 'Request was successfully created.' }
+    format.json { render :show, status: :created, location: @request }
   end
 
   private

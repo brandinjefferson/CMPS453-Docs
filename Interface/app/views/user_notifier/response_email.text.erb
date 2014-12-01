@@ -1,3 +1,10 @@
-UserNotifier#response_email
+Hello <%= @request.clid %>,
 
-<%= @greeting %>, find me in app/views/user_notifier/response_email.text.erb
+A request has been made with your CLID to move into:
+
+Building: <%= @request.building %>
+Room: <%= @request.room %>
+
+Confirm this request by selecting the following link:
+
+<%= link_to 'Confirm', createreq_url %>

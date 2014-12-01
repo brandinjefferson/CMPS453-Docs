@@ -12,6 +12,14 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'requests#new'
+  get 'submitapp' => 'requests#new'
+  get 'createreq' => 'requests#create_req'
+  get 'help' => 'home_controller#help'
+  get 'login' => 'sessions#new'
+  post 'login' => 'sessions#create'
+  get 'logout' => 'sessions#destroy'
+  get 'requestqueue' => 'requests#index'
+  
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
