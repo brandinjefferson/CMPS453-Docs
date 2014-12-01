@@ -72,7 +72,26 @@ class RequestsController < ApplicationController
     format.html { redirect_to 'http://housing.louisiana.edu/', notice: 'Request was successfully created.' }
     format.json { render :show, status: :created, location: @request }
   end
+  
+  def deleteaccept
+    @request.destroy
+    UserNotifier.accept_email(@request).deliver_now
+    respond_to do |format|
+      format.html { redirect_to requests_url }
+      format.json { head :no_content }
+    end
+  end
 
+
+  def deletedeny
+    @request.destroy
+    UserNotifier.denial_email(@request).deliver_now
+    respond_to do |format|
+      format.html { redirect_to requests_url }
+      format.json { head :no_content }
+    end
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_request

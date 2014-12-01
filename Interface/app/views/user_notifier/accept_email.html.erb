@@ -1,5 +1,10 @@
-<h1>UserNotifier#accept_email</h1>
+<h1>Notice</h1>
 
 <p>
-  <%= @greeting %>, find me in app/views/user_notifier/accept_email.html.erb
+  <%= @request.clid %>, your request for changing rooms to:
+  <br/> <br />
+  Building: <%= @request.building %><br />
+  Room: <%= @request.room %> 
+  
+  Has been approved.
 </p>
