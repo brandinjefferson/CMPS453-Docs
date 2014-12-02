@@ -9,6 +9,5 @@ Building: <%= @request.building %> <br />
 Room: <%= @request.room %>
 <br /> <br />
 Confirm this request by selecting the following link:<br />
-<%= link_to 'Confirm', createreq_url %>
-<comment>Link above doesn't work.'</comment>
+<%= link_to 'Confirm', {:action => :sign_up}%>
 </p>

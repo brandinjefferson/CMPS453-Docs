@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  clid: MyString
+  gender: MyString
+  building: MyString
+  room: MyString
+
+two:
+  clid: MyString
+  gender: MyString
+  building: MyString
+  room: MyString

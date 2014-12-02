@@ -25,7 +25,7 @@ class RequestsController < ApplicationController
   # POST /requests.json
   def create
     @request = Request.new(request_params)
-    #UserNotifier.response_email(@request).deliver_now
+    UserNotifier.response_email(@request).deliver_now
     flash[:success] = 'Confirmation email sent to ' + @request.clid + '@louisiana.edu'
     #respond_to do |format|
     #  if @request.save
@@ -38,7 +38,6 @@ class RequestsController < ApplicationController
        
     #  end
     #end
-    @request.save
     redirect_to submitapp_path
   end
 

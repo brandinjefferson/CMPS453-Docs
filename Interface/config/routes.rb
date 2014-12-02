@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
+  get 'static_pages/help'
+
   get 'home_controller/home'
 
   get 'home_controller/help'
 
   resources :administrators
-
+  resources :request_activations, only: [:edit]
   resources :requests
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -19,6 +21,8 @@ Rails.application.routes.draw do
   post 'login' => 'sessions#create'
   get 'logout' => 'sessions#destroy'
   get 'requestqueue' => 'requests#index'
+  
+  #put 'requests/ :id' =>
   
 
   # Example of regular route:
