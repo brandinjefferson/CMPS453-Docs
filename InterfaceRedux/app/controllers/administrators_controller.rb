@@ -10,6 +10,7 @@ class AdministratorsController < ApplicationController
   # GET /administrators/1
   # GET /administrators/1.json
   def show
+    @administrator = Administrator.find(params[:id])
   end
 
   # GET /administrators/new
@@ -25,15 +26,10 @@ class AdministratorsController < ApplicationController
   # POST /administrators.json
   def create
     @administrator = Administrator.new(administrator_params)
-
-    respond_to do |format|
-      if @administrator.save
-        format.html { redirect_to @administrator, notice: 'Administrator was successfully created.' }
-        format.json { render :show, status: :created, location: @administrator }
-      else
-        format.html { render :new }
-        format.json { render json: @administrator.errors, status: :unprocessable_entity }
-      end
+    if @administrator.save
+      
+    else
+      render 'new'
     end
   end
 
@@ -69,6 +65,6 @@ class AdministratorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def administrator_params
-      params.require(:administrator).permit(:username, :password)
+      params.require(:administrator).permit(:username, :password, :password_confirmation)
     end
 end
