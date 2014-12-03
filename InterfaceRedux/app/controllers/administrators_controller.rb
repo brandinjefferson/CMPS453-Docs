@@ -27,7 +27,8 @@ class AdministratorsController < ApplicationController
   def create
     @administrator = Administrator.new(administrator_params)
     if @administrator.save
-      
+      flash[:success] = 'New administrator created.'
+      redirect_to @administrator
     else
       render 'new'
     end

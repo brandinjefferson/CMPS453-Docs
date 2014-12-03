@@ -1,10 +1,11 @@
 class RequestsController < ApplicationController
-  before_action :set_request, only: [:show, :edit, :update, :destroy]
+  before_action :admin_logged_in, only: [:index,:show, :edit, :update, :destroy]
+  
 
   # GET /requests
   # GET /requests.json
   def index
-    @requests = Request.all
+    @requests = Request.paginate(page: params[:page])
   end
 
   # GET /requests/1
@@ -27,8 +28,9 @@ class RequestsController < ApplicationController
   def create
     @request = Request.new(request_params)
     if @request.save
-      flash[:success] = 'Confirmation email sent to your school email address.'
-      redirect_to @request
+      UserNotifier.account_activation(@request).deliver_now
+      flash[:info] = 'Confirmation email sent to your school email address.'
+      redirect_to root_url
     else
       render 'new'
     end
@@ -59,6 +61,14 @@ class RequestsController < ApplicationController
   end
 
   private
+    
+  #confirms the admin is logged in
+    def admin_logged_in
+      unless logged_in?
+        flash[:danger] = 'Log in.'
+        redirect_to root_url
+      end
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_request
       @request = Request.find(params[:id])

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141202034722) do
+ActiveRecord::Schema.define(version: 20141203080152) do
 
   create_table "administrators", force: true do |t|
     t.string   "username"
@@ -28,8 +28,11 @@ ActiveRecord::Schema.define(version: 20141202034722) do
     t.string   "gender"
     t.string   "building"
     t.string   "room"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.string   "activation_digest"
+    t.boolean  "activated",         default: true
+    t.datetime "activated_at"
   end
 
   add_index "requests", ["clid"], name: "index_requests_on_clid", unique: true
