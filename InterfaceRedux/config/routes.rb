@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'sessions/new'
+
   get 'static_pages/help'
 
   resources :administrators
@@ -8,6 +10,8 @@ Rails.application.routes.draw do
   root 'requests#new'
   get 'tohelp' => 'static_pages#help'
   get 'submit' => 'requests#new'
+  get 'adminlogin' => 'sessions#new'
+  post 'adminlogin' => 'sessions#create'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
