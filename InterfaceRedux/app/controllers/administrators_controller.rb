@@ -1,5 +1,5 @@
 class AdministratorsController < ApplicationController
-  before_action :set_administrator, only: [:show, :edit, :update, :destroy]
+  before_action :admin_logged_in, only: [:index,:show, :edit, :update, :destroy,:new]
 
   # GET /administrators
   # GET /administrators.json
@@ -28,7 +28,7 @@ class AdministratorsController < ApplicationController
     @administrator = Administrator.new(administrator_params)
     if @administrator.save
       flash[:success] = 'New administrator created.'
-      redirect_to @administrator
+      redirect_to requestqueue_path
     else
       render 'new'
     end
@@ -59,6 +59,13 @@ class AdministratorsController < ApplicationController
   end
 
   private
+    #confirms the admin is logged in
+    def admin_logged_in
+      unless logged_in?
+        flash[:danger] = 'Log in.'
+        redirect_to root_url
+      end
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_administrator
       @administrator = Administrator.find(params[:id])

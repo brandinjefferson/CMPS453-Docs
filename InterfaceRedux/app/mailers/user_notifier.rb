@@ -1,3 +1,4 @@
+require 'net/smtp'
 class UserNotifier < ApplicationMailer
 default from: 'brandinui@gmail.com'
   # Subject can be set in your I18n file at config/locales/en.yml
@@ -7,8 +8,8 @@ default from: 'brandinui@gmail.com'
   #
   def account_activation(request)
     @request = request
-    email = @request.clid + '@louisiana.edu'
-    mail to: email, subject: "Room Request Confirmation"
+    @email = @request.clid + '@louisiana.edu'
+    mail to: @email, subject: "Room Request Confirmation"
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
@@ -18,8 +19,8 @@ default from: 'brandinui@gmail.com'
   #
   def request_denied(request)
     @request = request
-    email = @request.clid + '@louisiana.edu'
-    mail to: email, subject: "Room Change Request Denied"
+    @email = @request.clid + '@louisiana.edu'
+    mail to: @email, subject: "Room Change Request Denied"
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
@@ -29,7 +30,7 @@ default from: 'brandinui@gmail.com'
   #
   def request_approved
     @request = request
-    email = @request.clid + '@louisiana.edu'
-    mail to: email, subject: "Room Change Request Approved"
+    @email = @request.clid + '@louisiana.edu'
+    mail to: @email, subject: "Room Change Request Approved"
   end
 end

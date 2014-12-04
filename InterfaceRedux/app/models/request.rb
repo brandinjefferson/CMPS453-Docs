@@ -10,7 +10,20 @@ class Request < ActiveRecord::Base
   validates :room, length: {maximum: 4}
   validates :building, presence: true
   
-  private
+  def activate_request
+    req.update_attribute(:activated,    true)
+    req.update_attribute(:activated_at, Time.zone.now)
+  end
+  
+  def send_notification_email
+    UserNotifier.account_activation(self)
+  end
+  
+    def Request.digest(string)
+      cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+                                                    BCrypt::Engine.cost
+      BCrypt::Password.create(string, cost: cost)
+    end
     def create_activation_digest
       self.activation_token = Request.new_token
       self.activation_digest = Request.digest(activation_token)
@@ -21,7 +34,9 @@ class Request < ActiveRecord::Base
       SecureRandom.urlsafe_base64
     end
     
-    def authenticated?
-      
+    def authenticated?(attribute, token)
+      digest = send("#{attribute}_digest")
+      return false if digest.nil?
+      BCrypt::Password.new(digest).is_password?(token)
     end
 end

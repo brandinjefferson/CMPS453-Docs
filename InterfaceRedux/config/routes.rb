@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   resources :administrators
   resources :account_activations, only: [:edit]
+  resources :request_approvals, only: [:destroy]
+  resources :request_denials, only: [:destroy]
   resources :requests
 
   root 'requests#new'
@@ -15,6 +17,8 @@ Rails.application.routes.draw do
   delete 'adminlogout' => 'sessions#destroy'
   get 'requestqueue' => 'requests#index'
   get 'createadmin' => 'administrators#new'
+  delete 'requestaccept' => 'request_approvals#destroy'
+  delete 'requestdeny' => 'request_denials#destroy'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

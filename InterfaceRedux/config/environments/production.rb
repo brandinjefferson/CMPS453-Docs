@@ -1,6 +1,19 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  host = 'warm-tor-9384.herokuapp.com'
+  config.action_mailer.default_url_options = { host: host }
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+    :address        => 'smtp.sendgrid.net',
+    :port           => 587,
+    :authentication => 'plain',
+    :user_name      => ENV['brandinjefferson'],
+    :password       => ENV['bjej9397'],
+    :domain         => 'heroku.com',
+    :enable_starttls_auto => true
+  }
   # Code is not reloaded between requests.
   config.cache_classes = true
 

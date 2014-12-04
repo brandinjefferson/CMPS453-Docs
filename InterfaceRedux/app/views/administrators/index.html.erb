@@ -1,8 +1,8 @@
-<p id="notice"><%= notice %></p>
+<% provide(:title,"Administrators")%>
 
 <h1>Listing Administrators</h1>
 
-<table>
+<table style="width: 100%">
   <thead>
     <tr>
       <th>Username</th>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Administrator', new_administrator_path %>
+<%= link_to 'New Administrator', new_administrator_path, class="btn" %>

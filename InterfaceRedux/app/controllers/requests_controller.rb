@@ -28,7 +28,7 @@ class RequestsController < ApplicationController
   def create
     @request = Request.new(request_params)
     if @request.save
-      UserNotifier.account_activation(@request).deliver_now
+      @request.send_notification_email
       flash[:info] = 'Confirmation email sent to your school email address.'
       redirect_to root_url
     else
@@ -53,16 +53,15 @@ class RequestsController < ApplicationController
   # DELETE /requests/1
   # DELETE /requests/1.json
   def destroy
-    @request.destroy
-    respond_to do |format|
-      format.html { redirect_to requests_url, notice: 'Request was successfully destroyed.' }
-      format.json { head :no_content }
+    @request = Request.find(params[:id])
+    if @request.present?
+      @request.destroy
     end
+    redirect_to requestqueue_url
   end
 
   private
-    
-  #confirms the admin is logged in
+    #confirms the admin is logged in
     def admin_logged_in
       unless logged_in?
         flash[:danger] = 'Log in.'

@@ -6,12 +6,12 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Request.create(clid: "bej0843",
-                building: "Conference Center",
+Request.create(clid: "abc1234",
+                building: "Harris Hall",
                 room: "360E",
-                gender: "male",
+                gender: "female",
                 activated_at: Time.zone.now,
-                activated: true)
+                activated: false)
 
 30.times do |n|
   clid = Faker::Lorem.characters(3) + Faker::Number.number(4)
@@ -22,5 +22,9 @@ Request.create(clid: "bej0843",
                 room: room,
                 gender: gender,
                 activated_at: Time.zone.now,
-                activated: true)
+                activated: false)
 end
+
+Administrator.create(username: "kingofthehill",
+                      password: "password",
+                      password_confirmation: "password")
