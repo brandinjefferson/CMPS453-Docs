@@ -1,7 +1,7 @@
 class RequestApprovalsController < ApplicationController
   def destroy
-    UserNotifer.request_approved(@request).deliver_now!
     @request = Request.find(params[:id])
+    UserNotifier.request_approved(@request).deliver_now!
     if @request.present?
       @request.destroy
     end

@@ -18,9 +18,11 @@ default from: 'brandinui@gmail.com'
   #   en.user_notifier.request_denied.subject
   #
   def request_denied(request)
-    @request = request
-    @email = @request.clid + '@louisiana.edu'
-    mail to: @email, subject: "Room Change Request Denied"
+    if !request.nil?
+      @request = request
+      @email = @request.clid + '@louisiana.edu'
+      mail to: @email, subject: "Room Change Request Denied"
+    end
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
@@ -28,7 +30,7 @@ default from: 'brandinui@gmail.com'
   #
   #   en.user_notifier.request_approved.subject
   #
-  def request_approved
+  def request_approved(request)
     @request = request
     @email = @request.clid + '@louisiana.edu'
     mail to: @email, subject: "Room Change Request Approved"

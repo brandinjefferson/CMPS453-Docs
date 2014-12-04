@@ -21,6 +21,7 @@ class RequestsController < ApplicationController
 
   # GET /requests/1/edit
   def edit
+    @request = Request.find(params[:id])
   end
 
   # POST /requests
@@ -53,10 +54,24 @@ class RequestsController < ApplicationController
   # DELETE /requests/1
   # DELETE /requests/1.json
   def destroy
+    
     @request = Request.find(params[:id])
     if @request.present?
       @request.destroy
     end
+    redirect_to requestqueue_url
+  end
+  
+  def decide_request
+    @request = Request.find(params[:id])
+    if params[:accept]
+      @request.send_accept_email
+      flash[:success] = 'Request accepted'
+    else
+      @request.send_deny_email
+      flash[:danger] = 'Request denied'
+    end
+    @request.remove_request(params[:id])
     redirect_to requestqueue_url
   end
 

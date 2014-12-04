@@ -1,7 +1,7 @@
-class RequestApprovalsController < ApplicationController
+class RequestDenialsController < ApplicationController
   def destroy
-    UserNotifer.request_denied(@request).deliver_now!
-    @request = Request.find(params[:id])
+    UserNotifier.request_denied(@request).deliver_now!
+    @request = Request.find(params[:clid])
     if @request.present?
       @request.destroy
     end

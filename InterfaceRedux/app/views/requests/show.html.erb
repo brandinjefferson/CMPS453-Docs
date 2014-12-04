@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Clid:</strong>
+  <strong>CLID:</strong>
   <%= @request.clid %>
 </p>
 
@@ -11,14 +11,25 @@
 </p>
 
 <p>
-  <strong>Building:</strong>
+  <strong>Current Building:</strong>
+  <%=  %>
+</p>
+
+<p>
+  <strong>Current Room:</strong>
+  <%=  %>
+</p>
+
+<p>
+  <strong>Chosen Building:</strong>
   <%= @request.building %>
 </p>
 
 <p>
-  <strong>Room:</strong>
+  <strong>Chosen Room:</strong>
   <%= @request.room %>
 </p>
 
-<%= link_to 'Edit', edit_request_path(@request) %> |
+<%= link_to 'Accept', accept_request_path(@request)  %> |
+<%= link_to 'Deny', deny_request_path(@request) %> |
 <%= link_to 'Back', requests_path %>

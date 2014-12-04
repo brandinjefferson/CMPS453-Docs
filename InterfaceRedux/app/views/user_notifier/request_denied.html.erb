@@ -1,5 +1,8 @@
-<h1>UserNotifier#request_denied</h1>
+<h1>Request Denied</h1>
 
 <p>
-  <%= @greeting %>, find me in app/views/user_notifier/request_denied.html.erb
+Your room change request has been denied. The room requested is:
 </p>
+
+<p><%= @request.building%></p>
+<p><%= @request.room%></p>

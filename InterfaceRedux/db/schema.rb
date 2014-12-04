@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141203080152) do
+ActiveRecord::Schema.define(version: 20141204141003) do
 
   create_table "administrators", force: true do |t|
     t.string   "username"
@@ -28,13 +28,31 @@ ActiveRecord::Schema.define(version: 20141203080152) do
     t.string   "gender"
     t.string   "building"
     t.string   "room"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.string   "activation_digest"
-    t.boolean  "activated",         default: true
+    t.boolean  "activated",         default: false
     t.datetime "activated_at"
   end
 
   add_index "requests", ["clid"], name: "index_requests_on_clid", unique: true
+
+  create_table "students", force: true do |t|
+    t.string   "clid"
+    t.string   "lastname"
+    t.string   "firstname"
+    t.string   "roomtype"
+    t.string   "building"
+    t.string   "roomid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "vacancies", force: true do |t|
+    t.string   "room"
+    t.string   "occupant"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end
